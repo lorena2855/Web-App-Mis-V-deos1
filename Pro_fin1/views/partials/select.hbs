@@ -1,0 +1,27 @@
+<div class="form-group">
+    <label for="exampleFormControlSelect1">Mostrar por red social</label>
+    <select id="selectOptions" class="form-control">
+            <option>Todas</option>
+ {{#each  data }}
+        <option > {{ red_name }}</option>
+        {{/each}}
+
+</select>
+<button id="myButton" onclick="" class="btn btn-primary">
+        Mostrar
+    </button>
+    <!-- redirecciona según opción-->
+    <script type="text/javascript">
+        var selectOpciones = document.getElementById("selectOptions");
+        document.getElementById("myButton").onclick = function () {
+            if (selectOpciones.value == "Todas") { //si selecciona la primera opcion 
+                location.href = `http://localhost:4000/`;
+                // location.href = `https://videosfav.now.sh`;
+            } else { //si selecciona cualquier otra opcion
+                location.href = `http://localhost:4000/red/${selectOpciones.value}`;
+                //location.href = `https://videosfav.now.sh/category/${selectOpciones.value}`;
+            }
+        };
+    </script>
+
+</div>

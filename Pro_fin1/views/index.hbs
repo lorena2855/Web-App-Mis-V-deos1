@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+           <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Página Principal | YouTube</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+    <div class="contenedor active" id="contenedor">
+        <header class="header">
+            <div class="contenedor-logo">
+                <button id="boton-menu" class="boton-menu"></button>
+                <a href="#" class="logo" style="color:white;"><i class="fas fa-search"></i> <span>Busqueda.</span></a>
+            </div>
+
+            <div class="barra-busqueda">
+                              <input id="formulario" type="text" class="form-control my-2" placeholder="Busca un video..."
+                    onkeyup="search()" />
+            </div>
+        </header>
+
+        <main class="main">
+            <h2 class="titulo" style="color: white;">Videos Recomendados</h2>
+
+            <div class="grid-videos">
+            </div>
+
+            <!--  -->
+<style type="text/css">
+#global {
+	height: 400px;
+	width: 100%;;
+	overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.texto {
+	padding:4px;
+	background:#fff;
+}
+</style>
+<div id="global">
+  <div id="mensajes">
+            <div id="datos" class="row">
+
+                {{#each data}}
+                <div class="col-sm-4">
+
+                    <div class="container text-center my-auto">
+                        <input value="{{id}}" class="video">
+
+                        <a style="text-decoration: none;" href="/detail/{{id}}">
+
+
+                            <div>
+                                <iframe width="347" height="210" src="{{url}}" frameborder="0"
+                                    allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                            </div>
+                            <h3 id="titulos" class="card-title text-uppercase">
+                                {{name}}
+                            </h3>
+                        </a>
+                        </a>
+
+                        <input value="{{voto}}" class="votos">
+
+                        <p>
+                            <label id="r1{{id}}">★</label>
+                            <label id="r2{{id}}">★</label>
+                            <label id="r3{{id}}">★</label>
+                            <label id="r4{{id}}">★</label>
+                            <label id="r5{{id}}">★</label>
+                            <label>{{voto}}/5 </label>
+
+                        </p><br>
+                    </div>
+                </div>
+
+                {{/each}}
+            </div>
+
+  </div>
+</div>
+
+            <!--|    -->
+        </main>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row bg-dark text-white p-5 text-center">
+            <div class="col-sm-3">
+            </div>
+
+            <div class="col-sm-6">
+                <h3>Youtube, Vimeo y más</h3>
+                <p>
+                    <span>Disfruta de tus videos favoritos de diversas plataformas de video!</span>
+                </p>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript">
+
+        function calificarIndex() {
+            var videos = document.getElementsByClassName("video");
+            var votos = document.getElementsByClassName("votos");
+            var prom = 0;
+            for (var i = 0; i < videos.length; i++) {
+                var ident = videos[i].value;
+                var radio1 = document.getElementById("r1" + ident);
+                var radio2 = document.getElementById("r2" + ident);
+                var radio3 = document.getElementById("r3" + ident);
+                var radio4 = document.getElementById("r4" + ident);
+                var radio5 = document.getElementById("r5" + ident);
+
+                prom = votos[i].value;
+                for (var j = 0; j <= prom; j++) {
+                    console.log(prom);
+                    switch (j) {
+                        case 1:
+                            radio1.style = "color: orange";
+                            break;
+                        case 2:
+                            radio2.style = "color: orange";
+                            break;
+                        case 3:
+                            radio3.style = "color: orange";
+                            break;
+                        case 4:
+                            radio4.style = "color: orange";
+                            break;
+                        case 5:
+                            radio5.style = "color: orange";
+                            break;
+                        default:
+                            console.log("no funciona");
+                    }
+                }
+            }
+        };
+        window.onload = calificarIndex;
+
+    </script>
+    
+
+        <script type="text/javascript">
+        function search() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("formulario");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("datos");
+            li = ul.getElementsByClassName("col-sm-4");
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0];
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "block";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+
+    </script>
+
+    <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
+</body>
+
+
+</html>

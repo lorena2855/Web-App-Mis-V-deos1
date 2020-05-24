@@ -1,0 +1,118 @@
+<div class="container p-4">
+     <h1>Mis videos</h1>
+
+    <br><br>
+
+    <div class="row">
+      
+        {{#each data}}
+        <div class="col-sm-4">
+            <div class="container text-center my-auto">
+                <div id="PanelListas">
+                    <a style="text-decoration: none;" href="/detail/{{id}}">
+
+                        <div>
+                            <input value="{{id}}" class="video" id="Tvideo">
+
+                            <iframe width="347" height="210" src="{{url}}" frameborder="0"
+                                allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                        </div>
+
+                        <h3 class="card-title text-uppercase" id="h3list">
+                            {{name}}
+                        </h3>
+                    </a>
+                    <h4 class="card-title text-uppercase" style="padding: 30px">
+                        {{red_name}}
+                    </h4 style="padding: 30px">
+                    <p class="card-title text-uppercase">
+                        {{category}}
+                    </p>
+                    <p class="m-2">{{description}}</p>
+                    <!-- CALIFICACION PROMEDIADA DE TODOS LOS USERS AQUÍ  -->
+                    <input value="{{voto}}" class="votos">
+
+                    <p>
+                        <label id="r1{{id}}">★</label>
+                        <label id="r2{{id}}">★</label>
+                        <label id="r3{{id}}">★</label>
+                        <label id="r4{{id}}">★</label>
+                        <label id="r5{{id}}">★</label>
+                        <label>{{voto}}/5 </label>
+
+                    </p><br>
+
+                    <!---***********************************************************-->
+                    <a class="btn btn-danger" href="/videos/delete/{{id}}">
+                        Eliminar Video
+                    </a>
+                    <a class="btn btn-secondary" href="/videos/update/{{id}}">
+                        Editar Video
+                    </a>
+                </div>
+            </div>
+        </div>
+        {{else}}
+        <div class="col-md-4 mx-auto">
+            <div class="container text-center my-auto">
+                <p>Aun no tienes videos guardados!.</p>
+                <a class="btn btn-success btn-block" href="/videos/add">Guarda uno!</a>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+
+    function calificarIndex() {
+        var videos = document.getElementsByClassName("video");
+        var votos = document.getElementsByClassName("votos");
+        var prom = 0;
+        for (var i = 0; i < videos.length; i++) {
+            var ident = videos[i].value;
+            console.log(ident);
+            var radio1 = document.getElementById("r1" + ident);
+            console.log(radio1);
+            var radio2 = document.getElementById("r2" + ident);
+            console.log(radio2);
+            var radio3 = document.getElementById("r3" + ident);
+            console.log(radio3);
+            var radio4 = document.getElementById("r4" + ident);
+            console.log(radio4);
+            var radio5 = document.getElementById("r5" + ident);
+            console.log(radio5);
+
+            prom = votos[i].value;
+            for (var j = 0; j <= prom; j++) {
+                console.log(prom);
+                switch (j) {
+                    case 1:
+                        radio1.style = "color: orange";
+                        break;
+                    case 2:
+                        radio2.style = "color: orange";
+                        break;
+                    case 3:
+                        radio3.style = "color: orange";
+                        break;
+                    case 4:
+                        radio4.style = "color: orange";
+                        break;
+                    case 5:
+                        radio5.style = "color: orange";
+                        break;
+                    default:
+                        console.log("no funciona");
+                }
+            }
+        }
+    };
+    window.onload = calificarIndex;
+
+</script>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+       <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+   
+<div class="container mt-5" id="primer_form" style="padding-left: 150px">
+    <div class="row">
+    <div class="col-md-7" id="form">
+            <div id="add" style="display: block;" class="card-body">
+                <form name="myform">
+                    <div class="form-group">
+                        <input id="name" type="text" placeholder="Nombre" class="form-control" autofocus>
+                    </div>
+                    <div class="form-group">
+                        <select id="id_red" type="input" class="form-control">
+                            {{#each  red }}
+                            <option value="{{id_red}}"> {{ red_name }}</option>
+                            {{/each}}
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <input id="link" type="url"
+                            title="The URL must be https://www.{red social}.com/embed/... or https://player.vimeo.com/video/..."
+                            placeholder="Link ej. https://www.youtube.com/embed/djV11Xbc914" class="form-control"
+                            onclick="validation1()">
+                    </div>
+                    <div class="form-group">
+                        <input id="category" type="text" placeholder="Categoria" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <textarea id="description" rows="2" class="form-control" placeholder="Descripcion"></textarea>
+                    </div>
+
+                </form>
+                <button id="verButton" type="button" onclick="mostrar()" class="btn btn-primary">
+                    Aceptar
+                </button>
+
+            </div>
+        </div>
+        {{#if link}}
+        <div class="col-md-5">
+            <h3>Ultimo video agregado...</h3>
+            <iframe width="447" height="310" src="{{link.url}}" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
+        {{/if}}
+    </div>
+</div>
+</div>
+
+<!-- *********************************************************************************************************************** -->
+<div id="segundo_form" style="display: none;" class="container text-center my-auto">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="container text-center my-auto">
+                <h3>Confirme los datos</h3>
+
+                <iframe id="video_add" width="347" height="210" src="" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+
+                <form action="/videos/add" method="POST">
+                    <div>
+                        <div class="form-group">
+                            <input id="name2" type="text" name="name" placeholder="Nombre" class="sinborde">
+                        </div>
+                        <div class="form-group">
+
+                            <select id="id_red2" type="input" class="sinborde" name="id_red">
+                                {{#each  red }}
+                                <option value="{{id_red}}"> {{ red_name }}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+
+                            <input id="link2" type="url"
+                                title="La URL debe ser https://www.{red social}.com/embed/... O https://player.vimeo.com/video/..."
+                                name="url" placeholder="Link ej. https://www.youtube.com/embed/djV11Xbc914"
+                                class="sinborde" onclick="validation()" onchange="videoAdd()">
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <input id="category2" type="text" name="category" placeholder="Categoria" class="sinborde">
+                        </div>
+
+                        <div class="form-group">
+
+                            <textarea id="description2" name="description" rows="2" class="sinborde"
+                                placeholder="Descripcion"></textarea>
+                        </div>
+                    </div>
+            </div>
+
+                <div class="col-sm-4">
+
+                    <button id="enviarButton" name="agregar" type="submit" onclick="ocultar()" class="btn btn-primary">
+                        Agregar
+                    </button>
+                </div>
+
+                </form>
+                <div class="col-sm-4">
+                    <button type="button" name="cancel" onclick="cancel()" class="btn btn-danger">
+                        Cancelar
+                    </button>
+                </div>
+
+
+            <!-- *********** ESTILOS FORM ********* -->
+            <script type="text/javascript">
+                var form1 = document.getElementById("primer_form");
+                var form2 = document.getElementById("segundo_form");
+
+                var nombre = document.getElementById("name");
+                var red = document.getElementById("id_red");
+                var links = document.getElementById("link");
+                var categoria = document.getElementById("category");
+                var descripcion = document.getElementById("description");
+
+                function mostrar() {
+
+                    var nombre = document.getElementById("name");
+                    var red = document.getElementById("id_red");
+                    var links = document.getElementById("link");
+                    var categoria = document.getElementById("category");
+                    var descripcion = document.getElementById("description");
+
+                    var nombre2 = document.getElementById("name2");
+                    var red2 = document.getElementById("id_red2");
+                    var links2 = document.getElementById("link2");
+                    var categoria2 = document.getElementById("category2");
+                    var descripcion2 = document.getElementById("description2");
+
+                    var video = document.getElementById("video_add");
+
+
+                    if ((nombre.value == "") || (red.value == "") || (links.value == "") || (categoria.value == "") || (descripcion.value == "") || (validation1() == false)) {
+                        alert("Todos los campos deben completarse correctamente");
+                    }
+
+                    else {
+                        form1.style = "display: none";
+                        form2.style = "visibility: visible";
+                        video.src = links.value;
+                        nombre2.value = nombre.value;
+                        red2.value = red.value;
+                        links2.value = links.value;
+                        categoria2.value = categoria.value;
+                        descripcion2.value = descripcion.value;
+
+                    }
+
+                };
+
+                function videoAdd() {
+                    var video = document.getElementById("video_add");
+                    var links2 = document.getElementById("link2");
+
+                    video.src = links2.value;
+                };
+                function ocultar() {
+                    var boton = document.getElementById("enviarButton");
+
+                    if ((nombre.value == "") || (red.value == "") || (links.value == "") || (categoria.value == "") || (descripcion.value == "") || (validation() == false)) {
+                        alert("Todos los campos deben completarse correctamente");
+                        boton.type = "button";
+                    }
+
+                    else {
+                        form2.style = "display: none";
+                        boton.type = "submit";
+                    }
+                };
+
+                function cancel() {
+                    form2.style = "display: none";
+                    form1.style = "visibility: visible";
+
+                };
+
+            </script>
+            <!-- ************************************ -->
+
+            <!-- *********** VALIDACIÓN URL ********* -->
+            <script type="text/javascript">
+                var select1 = document.getElementById("id_red");
+                var select = document.getElementById("id_red2");
+
+                function validation1() {
+                    var url = document.getElementById("link").value;
+                    var pattern;
+                    console.log(select1.value);
+
+                    switch (select1.value) {
+                        case '1':
+                            pattern = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com)\/embed\.*/;
+                            break;
+                        case '2':
+                            pattern = /^(?:https?:\/\/)?(?:player\.)?(?:vimeo\.com)\/video\.*/;
+                            break;
+                        case '3':
+                            pattern = /^(?:https?:\/\/)?(?:www\.)?(?:metacafe\.com)\/embed\.*/;
+                            break;
+                        case '4':
+                            pattern = /^(?:https?:\/\/)?(?:www\.)?(?:dailymotion\.com)\/embed\.*/;
+                            break;
+                        default:
+                            pattern = "no funciona";
+                    }
+
+                    if (url.match(pattern)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                };
+
+                function validation() {
+                    var url = document.getElementById("link2").value;
+                    var pattern;
+                    console.log(select.value);
+
+                    switch (select.value) {
+                        case '1':
+                            pattern = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com)\/embed\.*/;
+                            break;
+                        case '2':
+                            pattern = /^(?:https?:\/\/)?(?:player\.)?(?:vimeo\.com)\/video\.*/;
+                            break;
+                        case '3':
+                            pattern = /^(?:https?:\/\/)?(?:www\.)?(?:metacafe\.com)\/embed\.*/;
+                            break;
+                        case '4':
+                            pattern = /^(?:https?:\/\/)?(?:www\.)?(?:dailymotion\.com)\/embed\.*/;
+                            break;
+                        default:
+                            pattern = "no funciona";
+                    }
+
+                    if (url.match(pattern)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                };
+            </script>
+            <!-- ************************************ -->
+</body>
+</html>

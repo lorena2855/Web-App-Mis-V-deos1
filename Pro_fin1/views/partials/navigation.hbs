@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" onload="calificar()">
+    {{!-- <div class="container"> --}}
+    <div class="contenedor">
+      <a href=""></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          {{#if user}}
+
+                  <a class="nav-link" href="/profile"><i class="fas fa-user square"></i>Perfil</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout"><i class="fas fa-reply fill"></i>Salir</a>
+                </li>
+          <div class="wrapper">
+            <!-- Sidebar Holder -->
+            <nav id="sidebar">
+              <div class="sidebar-header">
+                <h3>Barra de navegacion</h3>
+                </h3>
+              </div>
+
+              <ul class="list-unstyled components">
+
+                <li class="active">
+                  <a href="/" class="active"><i class="fas fa-home"></i> Página Principal</a>
+
+                </li>
+                <br>
+                <li>
+                  <a href="/users"><i class="fas fa-star"></i> Suscriptores</a>
+
+                </li>
+                
+                <br>
+                <li>
+                  <a href="/videos"><i class="fas fa-folder"></i> Mis videos</a>
+
+                </li>
+<br>
+
+
+                <li>
+                  <a href="/videos/add"><i class="fas fa-folder"></i> Agregar videos</a>
+                </li>
+
+                <li class="nav-item">
+
+                <li class="nav-item dropdown">
+                </li>
+                <li class="nav-item">
+
+              </ul>
+            </nav>
+
+            <!-- Page Content Holder -->
+            <div id="content">
+              <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="glyphicon glyphicon-align-right"></i>
+                <span>Menu</span>
+              </button>
+            </div>
+
+
+            {{else}}
+
+           
+
+
+        
+                <li class="nav-item">
+              <a class="nav-link" href="/signin"><i class="fas fa-user-circle"></i> Iniciar Sesion</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/signup"><i class="fas fa-user-plus"></i>Registrarse</a>
+            </li>
+            
+                      <div class="wrapper">
+            <!-- Sidebar Holder -->
+            <nav id="sidebar">
+              <div class="sidebar-header">
+                <h3>Barra de navegacion</h3>
+                </h3>
+              </div>
+
+              <ul class="list-unstyled components">
+
+                <li class="active">
+                  <a href="/" class="active"><i class="fas fa-home"></i> Página Principal</a>
+
+                </li>
+                <br>
+                <li>
+                  <a href="/users"><i class="fas fa-star"></i> Suscriptores</a>
+
+                </li>
+                <br>
+     </ul>
+     </nav>
+     </div>           
+
+                       <!-- Page Content Holder -->
+            <div id="content">
+              <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="glyphicon glyphicon-align-right"></i>
+                <span>Menu</span>
+              </button>
+            </div>
+
+
+            {{/if}}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+  <!-- Bootstrap Js CDN -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- jQuery Custom Scroller CDN -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+    });
+  </script>
+
+</body>
+
+</html>
