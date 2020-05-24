@@ -3,7 +3,7 @@
 # El desarrollo y funcionamiento de esta aplicaion consta de lo siguiente:
   
    
- * Los vídeos favoritos son mostrados y estan ubicados en la pagina principal 
+ * Los vídeos favoritos son mostrados y estan ubicados en la pagina principal. 
  * En cada vídeo se muestran los datos basicos,como nombre del video y calificacion que han sido ordenados dejando al video mas 
    antiguo por debajo, si se selecciona el nombre de algun video, este mostrara los siguientes datos desde una nueva pagina:
  -Nombre del vídeo 
